@@ -10,16 +10,15 @@
  * var ciphertext = encrypt(key,value);//加密
  * var plaintext = encrypt(key,ciphertext);//解密
  */
-function Des(key, value) {
-    this.key = key;
-    this.value = value;
-    this._keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-}
-Des.prototype._Base64Encode = function (e) {
+const _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+
+
+
+function _Base64Encode (e) {
     var t = "";
     var n, r, i, s, o, u, a;
     var f = 0;
-    e = this._Base64_utf8_encode(e);
+    e = _Base64_utf8_encode(e);
     while (f < e.length) {
         n = e.charCodeAt(f++);
         r = e.charCodeAt(f++);
@@ -33,21 +32,21 @@ Des.prototype._Base64Encode = function (e) {
         } else if (isNaN(i)) {
             a = 64
         }
-        t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a)
+        t = t + _keyStr.charAt(s) + _keyStr.charAt(o) + _keyStr.charAt(u) + _keyStr.charAt(a)
     }
     return t
 }
-Des.prototype._Base64Decode = function (e) {
+function _Base64Decode (e) {
     var t = "";
     var n, r, i;
     var s, o, u, a;
     var f = 0;
     e = e.replace(/[^A-Za-z0-9+/=]/g, "");
     while (f < e.length) {
-        s = this._keyStr.indexOf(e.charAt(f++));
-        o = this._keyStr.indexOf(e.charAt(f++));
-        u = this._keyStr.indexOf(e.charAt(f++));
-        a = this._keyStr.indexOf(e.charAt(f++));
+        s = _keyStr.indexOf(e.charAt(f++));
+        o = _keyStr.indexOf(e.charAt(f++));
+        u = _keyStr.indexOf(e.charAt(f++));
+        a = _keyStr.indexOf(e.charAt(f++));
         n = s << 2 | o >> 4;
         r = (o & 15) << 4 | u >> 2;
         i = (u & 3) << 6 | a;
@@ -59,10 +58,10 @@ Des.prototype._Base64Decode = function (e) {
             t = t + String.fromCharCode(i)
         }
     }
-    t = this._Base64_utf8_decode(t);
+    t = _Base64_utf8_decode(t);
     return t
 }
-Des.prototype._Base64_utf8_encode = function (e) {
+function _Base64_utf8_encode (e) {
     e = e.replace(/rn/g, "n");
     var t = "";
     for (var n = 0; n < e.length; n++) {
@@ -80,7 +79,7 @@ Des.prototype._Base64_utf8_encode = function (e) {
     }
     return t
 }
-Des.prototype._Base64_utf8_decode = function (e) {
+function _Base64_utf8_decode (e) {
     var t = "";
     var n = 0;
     var c1, c2, c3
@@ -108,7 +107,7 @@ Des.prototype._Base64_utf8_decode = function (e) {
  * @param {String} value 内容
  * @param {String} type 类型 ->encrypt加密|decrypt解密
  */
-Des.prototype._DesCreate = function (key, value, type) {
+function _DesCreate (key, value, type) {
     var message = value;
     if(type==='decrypt'){
         var requestValue = "";
@@ -126,7 +125,7 @@ Des.prototype._DesCreate = function (key, value, type) {
     var spfunction7 = new Array(0x200000, 0x4200002, 0x4000802, 0, 0x800, 0x4000802, 0x200802, 0x4200800, 0x4200802, 0x200000, 0, 0x4000002, 0x2, 0x4000000, 0x4200002, 0x802, 0x4000800, 0x200802, 0x200002, 0x4000800, 0x4000002, 0x4200000, 0x4200800, 0x200002, 0x4200000, 0x800, 0x802, 0x4200802, 0x200800, 0x2, 0x4000000, 0x200800, 0x4000000, 0x200800, 0x200000, 0x4000802, 0x4000802, 0x4200002, 0x4200002, 0x2, 0x200002, 0x4000000, 0x4000800, 0x200000, 0x4200800, 0x802, 0x200802, 0x4200800, 0x802, 0x4000002, 0x4200802, 0x4200000, 0x200800, 0, 0x2, 0x4200802, 0, 0x200802, 0x4200000, 0x800, 0x4000002, 0x4000800, 0x800, 0x200002);
     var spfunction8 = new Array(0x10001040, 0x1000, 0x40000, 0x10041040, 0x10000000, 0x10001040, 0x40, 0x10000000, 0x40040, 0x10040000, 0x10041040, 0x41000, 0x10041000, 0x41040, 0x1000, 0x40, 0x10040000, 0x10000040, 0x10001000, 0x1040, 0x41000, 0x40040, 0x10040040, 0x10041000, 0x1040, 0, 0, 0x10040040, 0x10000040, 0x10001000, 0x41040, 0x40000, 0x41040, 0x40000, 0x10041000, 0x1000, 0x40, 0x10040040, 0x1000, 0x41040, 0x10001000, 0x40, 0x10000040, 0x10040000, 0x10040040, 0x10000000, 0x40000, 0x10001040, 0, 0x10041040, 0x40040, 0x10000040, 0x10040000, 0x10001000, 0x10001040, 0, 0x10041040, 0x41000, 0x41000, 0x1040, 0x1040, 0x40040, 0x10000000, 0x10041000);
 
-    var keys = this._DesCreateKeys(key);
+    var keys = _DesCreateKeys(key);
     var m = 0, i, j, temp, right1, right2, left, right, looping;
     var endloop, loopinc;
     var len = message.length;
@@ -197,7 +196,7 @@ Des.prototype._DesCreate = function (key, value, type) {
     }
     return result + tempresult;
 }
-Des.prototype._DesCreateKeys = function (key) {
+function _DesCreateKeys (key) {
     var pc2bytes0 = new Array(0, 0x4, 0x20000000, 0x20000004, 0x10000, 0x10004, 0x20010000, 0x20010004, 0x200, 0x204, 0x20000200, 0x20000204, 0x10200, 0x10204, 0x20010200, 0x20010204);
     var pc2bytes1 = new Array(0, 0x1, 0x100000, 0x100001, 0x4000000, 0x4000001, 0x4100000, 0x4100001, 0x100, 0x101, 0x100100, 0x100101, 0x4000100, 0x4000101, 0x4100100, 0x4100101);
     var pc2bytes2 = new Array(0, 0x8, 0x800, 0x808, 0x1000000, 0x1000008, 0x1000800, 0x1000808, 0, 0x8, 0x800, 0x808, 0x1000000, 0x1000008, 0x1000800, 0x1000808);
@@ -267,9 +266,9 @@ Des.prototype._DesCreateKeys = function (key) {
  * @param {String} plaintext 明文
  * @return {String} ciphertext 密文
  */
-Des.prototype.encrypt = function (key,plaintext) {
-    var encodedString = this._Base64Encode(plaintext);
-    var ciphertext = this._DesCreate(key, encodedString, 'encrypt');
+export function encrypt (key: string, plaintext: string): string {
+    var encodedString = _Base64Encode(plaintext);
+    var ciphertext = _DesCreate(key, encodedString, 'encrypt');
     return ciphertext
 }
 /**
@@ -278,11 +277,8 @@ Des.prototype.encrypt = function (key,plaintext) {
  * @param {String} ciphertext 密文
  * @return {String} plaintext 明文
  */
-Des.prototype.decrypt = function (key,ciphertext) {
-    var decryptText = this._DesCreate (key, ciphertext, 'decrypt');//Des解密
-    var plaintext = this._Base64Decode(decryptText);//base64解密
+export function decrypt (key: string, ciphertext: string): string {
+    var decryptText = _DesCreate (key, ciphertext, 'decrypt');//Des解密
+    var plaintext = _Base64Decode(decryptText);//base64解密
     return plaintext
 }
-
-
-export default Des
