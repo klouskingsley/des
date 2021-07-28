@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * 使用方法
  * 实例化对象 new Des()
@@ -319,4 +321,5 @@ Des.prototype.decrypt = function (key, ciphertext) {
     var plaintext = this._Base64Decode(decryptText); //base64解密
     return plaintext;
 };
+exports.default = Des;
 //# sourceMappingURL=des.js.map

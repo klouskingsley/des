@@ -283,3 +283,6 @@ Des.prototype.decrypt = function (key,ciphertext) {
     var plaintext = this._Base64Decode(decryptText);//base64解密
     return plaintext
 }
+
+
+export default Des

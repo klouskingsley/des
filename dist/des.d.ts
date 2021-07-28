@@ -11,3 +11,4 @@
  * var plaintext = encrypt(key,ciphertext);//解密
  */
 declare function Des(key: any, value: any): void;
+export default Des;
