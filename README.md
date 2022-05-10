@@ -3,7 +3,7 @@
 # Usage
 
 ```ts
-import {encrypt, decrypt} from '@volt-wallet/des'
+import {encrypt, decrypt} from './src/des'
 const key = 'secretKey'
 const plainText = 'plain text'
 
