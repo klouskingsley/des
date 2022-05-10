@@ -1,5 +1,5 @@
 {
-  "name": "@volt-wallet/des",
+  "name": "des",
   "version": "1.1.0",
   "description": "---",
   "main": "dist/des.js",
@@ -7,17 +7,9 @@
     "build": "tsc --project tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Volt-Wallet/des.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Volt-Wallet/des/issues"
-  },
-  "homepage": "https://github.com/Volt-Wallet/des#readme",
   "devDependencies": {
     "typescript": "^4.3.5"
   }
